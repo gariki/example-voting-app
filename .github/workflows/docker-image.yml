@@ -15,6 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
+      id: buildvote
       run: docker build vote/. --file vote/Dockerfile --tag my-image-name:$(date +%s)
       
     - uses: actions/checkout@v3
@@ -22,5 +23,6 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@v4
       with:
         name: gariki/test
-        username: ${{secrets.DOCKER_USER}}
-        password: ${{secrets.DOCKER_PASSWORD}}
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        tags: "latest:${{ steps.buildvote.outputs.my-image-name }}"
