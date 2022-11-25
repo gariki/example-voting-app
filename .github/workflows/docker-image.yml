@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file /home/runner/work/example-voting-app/vote/Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file vote/Dockerfile --tag my-image-name:$(date +%s)
