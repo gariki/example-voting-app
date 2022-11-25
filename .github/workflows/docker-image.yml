@@ -16,3 +16,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build vote/. --file vote/Dockerfile --tag my-image-name:$(date +%s)
+      
+    - uses: actions/checkout@v3
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@v4
+      with:
+        name: gariki/test
+        username: ${{secrets.DOCKER_USER}}
+        password: ${{secrets.DOCKER_PASSWORD}}
